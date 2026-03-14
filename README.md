@@ -1,7 +1,7 @@
-#Aurora Visibility Intelligence Platform
+Aurora Visibility Intelligence Platform
 A web platform that predicts the likelihood of observing and photographing auroras using environmental and space‑weather data.
 
-#Problem Statement
+Problem Statement
 Aurora visibility depends on multiple complex environmental and space‑weather factors such as solar activity, cloud cover, moon illumination, and light pollution.
 
 Most existing scientific data sources provide raw measurements that are difficult for observers and photographers to interpret in practical terms.
@@ -23,16 +23,22 @@ The system computes:
 
 These signals are combined to estimate the real‑world probability of observing and photographing auroras.
 
-~Features
--Location‑based aurora visibility prediction
--Aurora activity estimation using solar wind and IMF data
--Cloud cover–based sky visibility analysis
--Moon illumination and Bortle scale darkness modeling
--Aurora photography feasibility scoring
--Interactive web interface with map and location input
--Cloud‑deployed backend API
+Features
+Location‑based aurora visibility prediction
 
-~System Architecture
+Aurora activity estimation using solar wind and IMF data
+
+Cloud cover–based sky visibility analysis
+
+Moon illumination and Bortle scale darkness modeling
+
+Aurora photography feasibility scoring
+
+Interactive web interface with map and location input
+
+Cloud‑deployed backend API
+
+System Architecture
 User (Web Interface)
         ↓
 Frontend Web Application
@@ -44,28 +50,33 @@ Aurora Visibility Model
 Visibility & Photography Scores
         ↓
 Results displayed to the user
-
-
-~Tech Stack
-
+Tech Stack
 Frontend
 HTML
+
 CSS
+
 JavaScript
 
 
+
 Backend
--Python
--Flask
--Flask‑CORS
--Gunicorn
--Requests (for future space‑weather API integration)
+Python
+
+Flask
+
+Flask‑CORS
+
+Gunicorn
+
+Requests (for future space‑weather API integration)
 
 Deployment / Infrastructure
 GitHub
+
 Render Cloud Hosting
 
-~API Endpoint
+API Endpoint
 Example request:
 
 /score?bz=-5&solarwind_speed=500&cloud_cover=0.2&moon_light=0.3&bortle_scale=4
@@ -106,9 +117,10 @@ Team Aurora
 48‑Hour Hackathon Project
 
 Team Members:
-Avisha 
+
+Avisha
 Bhuvi
 Rinki
 
-~Project Vision
+Project Vision
 The Aurora Visibility Intelligence Platform aims to bridge the gap between complex scientific space‑weather data and real‑world aurora observation, enabling photographers, researchers, and enthusiasts to make informed decisions about when and where auroras can be observed.
