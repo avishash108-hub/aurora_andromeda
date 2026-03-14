@@ -36,7 +36,7 @@ def score():
   solar = float(request.args.get("solarwind_speed"))
   cloud = float(request.args.get("cloud_cover"))
   moon = float(request.args.get("moon_light"))
-  bortle = float(request.args.get("bortle_scale))
+  bortle = float(request.args.get("bortle_scale"))
 
   strength = aurora_strength(bz, solarwind_speed)
   visibility = cloud_cov(cloud_cover)
