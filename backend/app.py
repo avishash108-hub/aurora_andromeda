@@ -29,7 +29,7 @@ photo_score = stregth*visibility*darkness
 percentage  = photo_score*100
 return percentage
 
-@app.route("/score")
+@app.route("/score") #put url here
 
 def score():
   bz = float(request.args.get("bz"))
@@ -51,5 +51,5 @@ def score():
   })
 
 if _name_ == "_main_":
-   app.run()
+   app.run(host = "0.0.0.0", port=10000)
 
