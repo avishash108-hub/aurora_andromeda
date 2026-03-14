@@ -24,12 +24,14 @@ def darkness(moon_light, bortle_scale):
   return darkness_factor
 
 def photo_factor(strength, visibility, dark):
-  photo_score = strength*visibility*darkness
+  photo_score = strength*visibility*dark
   percentage  = photo_score*100
   return percentage
 
+@app.route("/")
+def home():
+  return "Aurora API running"
 @app.route("/score")
-
 def score():
   bz = float(request.args.get("bz"))
   solar = float(request.args.get("solarwind_speed"))
@@ -40,7 +42,7 @@ def score():
   strength = aurora_strength(bz, solar)
   visibility = cloud_cov(cloud)
   dark = darkness (moon, bortle)
-  photo = photo_factor(strength, visibility, darkness)
+  photo = photo_factor(strength, visibility, dark)
 
   return jsonify({
      "aurora_strength" : strength,
