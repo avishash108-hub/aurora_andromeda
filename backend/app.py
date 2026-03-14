@@ -2,15 +2,15 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 def aurora_strength(bz, solarwind_speed):
   bz_factor = abs(bz)/10
-  if bz_factor >1:
-    bz_factor  = 1
-  
+  if bz_factor > 1:
+    bz_factor = 1
+
   solar_factor = (solarwind_speed-300)/400
   if solar_factor > 1:
-    solar_factor  = 1
+    solar_factor = 1
 
- strength = bz_factor*0.6 + solar_factor*0.4
- return strength
+  strength = bz_factor*0.6 + solar_factor*0.4
+  return strength
 
 
 def cloud_cov(cloud_cover):
@@ -23,7 +23,7 @@ def darkness(moon_light, bortle_scale):
   darkness_factor = moon_dark + lightpoll_factor
   return darkness_factor
 
-def photo_factor(strength, visibility, darkness):
+def photo_factor(strength, visibility, dark):
   photo_score = strength*visibility*darkness
   percentage  = photo_score*100
   return percentage
