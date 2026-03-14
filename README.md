@@ -25,3 +25,84 @@ These signals are combined to estimate the real‑world probability of observing
 - **Cloud‑deployed backend API**
 
 ## System Architecture
+User (Web Interface)
+↓
+Frontend Web Application
+↓
+Flask API Backend
+↓
+Aurora Visibility Model
+↓
+Visibility & Photography Scores
+↓
+Results displayed to the user
+
+
+
+
+## Tech Stack
+
+### Frontend
+- **HTML**
+- **CSS**
+- **JavaScript**
+- **Leaflet Map API**
+
+### Backend
+- **Python**
+- **Flask**
+- **Flask-CORS**
+- **Gunicorn**
+- **Requests** *(for future space‑weather API integration)*
+
+### Deployment / Infrastructure
+- **GitHub**
+- **Render Cloud Hosting**
+
+## API Endpoint
+Example request: 
+
+Example response:
+```json
+{
+ "aurora_strength": 0.58,
+ "visibility": 0.8,
+ "darkness": 0.72,
+ "photography_score": 33.6
+}
+
+##How to Run Locally
+Clone the repository:
+
+git clone <your-repository-link>
+Navigate to the project folder:
+
+cd aurora-platform
+Install dependencies:
+
+pip install -r requirements.txt
+Run the application:
+
+python app.py
+
+##Future Improvements
+Integrate real‑time NOAA space‑weather APIs
+
+Automatic weather data fetching
+
+Machine learning–based aurora visibility prediction
+
+Global aurora heatmap visualization
+
+Real‑time aurora alert notifications
+
+##Team
+Team Andromeda
+Avisha
+Bhuvi
+Rinki
+
+##Project Vision
+The Aurora Visibility Intelligence Platform aims to bridge the gap between complex scientific space‑weather data and real‑world aurora observation, enabling photographers, researchers, and enthusiasts to make informed decisions about when and where auroras can be observed.
+
+
