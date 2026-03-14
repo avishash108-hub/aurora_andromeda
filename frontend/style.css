@@ -1,0 +1,104 @@
+body{
+
+margin:0;
+font-family:Arial;
+text-align:center;
+color:white;
+
+/* Aurora Background */
+background-image:url("https://res.cloudinary.com/dcrrjqkxk/image/upload/v1773488378/WhatsApp_Image_2026-03-14_at_4.57.05_PM_mffrjv.jpg");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+
+}
+h1{
+    text-transform: uppercase;
+}
+
+
+h2{
+margin-top:20px;
+
+}
+
+/* MAP */
+
+/* #map{
+height:400px;
+opacity:0.5;
+width:70%;
+margin:auto;
+margin-top:20px;
+border-radius:10px;
+
+} */
+
+#map{
+height:400px;
+opacity:0.5;
+width:70%;
+margin:auto;
+margin-top:20px;
+border-radius:10px;
+}
+
+.leaflet-tile-pane{
+filter: brightness(1.2) contrast(0.9);
+}
+/* SCORE PANEL */
+
+.panel{
+
+width:300px;
+margin:20px auto;
+padding:15px;
+
+background:rgba(0,0,0,0.6);
+border-radius:10px;
+
+}
+
+/* LOCATION BOX */
+
+/* .locationBox{
+
+margin:20px;
+
+} */
+
+.location-box {
+    margin-top: 5px;
+  display: flex;
+  gap: 10px;        /* space between input and button */
+  align-items: center;
+  margin-top: 10px;
+}
+
+.location-box input {
+  padding: 8px;
+}
+
+.location-box button {
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+input{
+
+padding:10px;
+border:none;
+border-radius:5px;
+
+}
+
+button{
+
+padding:10px 15px;
+border:none;
+border-radius:5px;
+background:rgba(33, 2, 101, 0.707);
+color:white;
+cursor:pointer;
+
+}
