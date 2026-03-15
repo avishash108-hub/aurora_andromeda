@@ -54,6 +54,10 @@ def home():
 @app.route("/score")
 def score():
   bz, solar = fetch_solar_data()
+  if bz < -7 or solar > 500:
+    alert = "High Aurora activity"
+  else:
+    alert = "Normal Aurora conditions"
   cloud = float(request.args.get("cloud_cover"))
   moon = float(request.args.get("moon_light"))
   bortle = float(request.args.get("bortle_scale"))
