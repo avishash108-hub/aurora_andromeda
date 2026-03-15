@@ -2,12 +2,27 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import requests
 import os
+import base64
 def fetch_cloud_cover(lat, lon):
   weatherapi_key = os.getenv("WEATHER_API")
   url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={weatherapi_key}"
   data = requests.get(url).json()
   cloud_cover = data.get("clouds",{}).get("all",0)/100
   return cloud_cover
+
+def fetch_moon_light(lat, lon):
+  app_id = os.getenv("APP_ID")
+  app_secret = os.getenv("SECRET_KEY")
+  credentials = f"{app_id}:{app_secret}"
+  encoded_credentials = base64.b64encode(credentials.encode()).decode()
+  url = f"https://api.astronomyapi.com/api/v2/bodies/positions/moon?latitude={lat}&longitude={lon}&elevation=0"
+  headers = {
+    "Authorization" : f"Basic {encoded_credentials}"
+  }
+  response = requests.get(url, headers = headers).json()
+  moon_light = response["data"]["table"]["rows"][0]["cells"][0]["extraInfo"]["illumination"]["fraction"]
+  return moon_light
+  
 def fetch_solar_data():
   plasma = requests.get("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", timeout = 5).json()
   mag = requests.get("https://services.swpc.noaa.gov/products/solar-wind/mag-1-day.json", timeout = 5).json()
@@ -82,7 +97,7 @@ def score():
   lat = float(request.args.get("lat"))
   lon = float(request.args.get("lon"))
   cloud = fetch_cloud_cover(lat, lon)
-  moon = float(request.args.get("moon_light"))
+  moon = fetch_moon_light(lat, lon)
   bortle = float(request.args.get("bortle_scale"))
   prob = fetch_aurora_probab(lat, lon)
   
