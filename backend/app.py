@@ -5,16 +5,7 @@ import os
 import base64
 import threading
 import time
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-import requests
-import os
-import base64
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-import requests
-import os
-import base64
+
 solar_cache = {
   "bz": 0,
   "solarwind": 400,
@@ -23,6 +14,7 @@ solar_cache = {
 def fetch_cloud_cover(lat, lon):
   weatherapi_key = os.getenv("WEATHER_API")
   url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={weatherapi_key}"
+  data = requests.get(url).json()
   cloud_cover = data.get("clouds",{}).get("all",0)/100
   return cloud_cover
 
@@ -40,7 +32,31 @@ def fetch_moon_light(lat, lon):
   return moon_light
   
 def fetch_solar_data():
+
+  plasma = requests.get("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", timeout=5).json()
+  mag = requests.get("https://services.swpc.noaa.gov/products/solar-wind/mag-1-day.json", timeout=5).json()
+
+  latest_plasma = plasma[-1]
+  latest_mag = mag[-1]
+
+  solar_value = latest_plasma[2]
+  bz_value = latest_mag[3]
+
+  if solar_value != "" and solar_value != None:
+    solarwind_speed = float(solar_value)
+  else:
+    solarwind_speed = 400
+
+  if bz_value != "" and bz_value != None:
+    bz = float(bz_value)
+  else:
+    bz = 0
+
+  return bz, solarwind_speed
+
+def poll_solar_data():
   global solar_cache
+
   while True:
     try:
       bz, solar = fetch_solar_data()
@@ -55,22 +71,6 @@ def fetch_solar_data():
       print("Solar fetch failed:", e)
 
     time.sleep(300)
-  plasma = requests.get("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", timeout = 5).json()
-  mag = requests.get("https://services.swpc.noaa.gov/products/solar-wind/mag-1-day.json", timeout = 5).json()
-  latest_plasma = plasma[-1]
-  latest_mag = mag[-1]
-  solar_value = latest_plasma[2]
-  bz_value = latest_mag[3]
-  if solar_value != "" and solar_value != None:
-    solarwind_speed = float(solar_value)
-  else:
-    solarwind_speed = 400
-  if bz_value != "" and bz_value != None:
-    bz = float(bz_value)
-  else:
-    bz = 0
- 
-  return bz, solarwind_speed
 
 def fetch_aurora_probab(lat, lon):
     aurora = requests.get("https://services.swpc.noaa.gov/json/ovation_aurora_latest.json", timeout = 5).json()
