@@ -95,12 +95,12 @@ def score():
   photo = photo_factor(strength, visibility, dark, prob)
 
   return jsonify({
-     "aurora_strength" : strength,
-     "aurora_probability" : prob,
-     "visibility" : visibility,
-     "darkness" : dark,
-     "photography_score" : photo,
-     "aurora_alert_status" : alert
+    "aurora_alert_status" : alert
+    "aurora_probability" : prob,
+    "aurora_strength" : strength,
+    "visibility" : visibility,
+    "darkness" : dark,
+    "photography_score" : photo,
   })
 
 if __name__ == "__main__":
