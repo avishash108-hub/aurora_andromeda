@@ -63,7 +63,7 @@ def cloud_cov(cloud_cover):
 def darkness(moon_light, bortle_scale):
   moon_dark = 1 - moon_light
   lightpoll_factor = 1 - (bortle_scale/9)
-  darkness_factor = moon_dark + lightpoll_factor
+  darkness_factor = (moon_dark + lightpoll_factor)/2
   return darkness_factor
 
 def photo_factor(strength, visibility, dark, prob):
@@ -95,7 +95,7 @@ def score():
   photo = photo_factor(strength, visibility, dark, prob)
 
   return jsonify({
-    "aurora_alert_status" : alert
+    "aurora_alert_status" : alert,
     "aurora_probability" : prob,
     "aurora_strength" : strength,
     "visibility" : visibility,
