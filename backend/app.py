@@ -77,9 +77,9 @@ def home():
 @app.route("/score")
 def score():
   bz, solar = fetch_solar_data()
-  cloud = fetch_cloud_cover(lat, lon)
   lat = float(request.args.get("lat"))
   lon = float(request.args.get("lon"))
+  cloud = fetch_cloud_cover(lat, lon)
   moon = float(request.args.get("moon_light"))
   bortle = float(request.args.get("bortle_scale"))
   prob = fetch_aurora_probab(lat, lon)
