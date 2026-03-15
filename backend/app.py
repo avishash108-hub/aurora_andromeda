@@ -84,20 +84,32 @@ def poll_solar_data():
     time.sleep(300)
 
 def fetch_aurora_probab(lat, lon):
-    aurora = requests.get("https://services.swpc.noaa.gov/json/ovation_aurora_latest.json", timeout = 5).json()
+
+    aurora = requests.get(
+        "https://services.swpc.noaa.gov/json/ovation_aurora_latest.json",
+        timeout=5
+    ).json()
+
     coordinates = aurora["coordinates"]
+
     prob_sum = 0
     count = 0
+
     for points in coordinates:
-      lon_point = points[0]
-      lat_point = points[1]
-      probability = points[2]
-      if abs(lat_point - lat) < 2 and abs(lon_point - lon) < 2:
-        prob_sum+=probability
-        count+=1
+
+        lon_point = points[0]
+        lat_point = points[1]
+        probability = points[2]
+
+        # increased search radius so grid points are not missed
+        if abs(lat_point - lat) < 5 and abs(lon_point - lon) < 5:
+            prob_sum += probability
+            count += 1
+
     if count == 0:
-      return 0
-    aurora_prob = prob_sum/count/100
+        return 0
+
+    aurora_prob = (prob_sum / count) / 100
     return aurora_prob
   
 app = Flask(__name__)
