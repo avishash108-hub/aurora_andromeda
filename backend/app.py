@@ -1,10 +1,10 @@
 from flask import Flask, request, jsonify
 import requests
 def fetch_solar_data():
-  plasma = requests.get("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json").json()
-  mag = requests.get("https://services.swpc.noaa.gov/products/solar-wind/mag-1-day.json").json()
-  latest_plasma = plasma[len(plasma)-1]
-  latest_mag = mag[len(mag)-1]
+  plasma = requests.get("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", timeout = 5).json()
+  mag = requests.get("https://services.swpc.noaa.gov/products/solar-wind/mag-1-day.json", timeout = 5).json()
+  latest_plasma = plasma[-1]
+  latest_mag = mag[-1]
   solar_value = latest_plasma[2]
   bz_value = latest_mag[3]
   if solar_value != "" and solar_value != None:
@@ -19,13 +19,19 @@ def fetch_solar_data():
   return bz, solarwind_speed
 
 def fetch_aurora_probab(lat, lon):
-    aurora = requests.get("https://services.swpc.noaa.gov/json/ovation_aurora_latest.json").json()
+    aurora = requests.get("https://services.swpc.noaa.gov/json/ovation_aurora_latest.json", timeout = 5).json()
     coordinates = aurora["coordinates"]
     prob_sum = 0
     count = 0
     for points in coordinates:
-        prob_sum+=points[2]
+      lon_point = points[0]
+      lat_point = points[1]
+      probability = points[2]
+      if abs(lat_point - lat) < 2 and abs(lon_point - lon) < 2:
+        prob_sum+=probability
         count+=1
+    if count == 0:
+      return 0
     aurora_prob = prob_sum/count/100
     return aurora_prob
   
@@ -54,7 +60,7 @@ def darkness(moon_light, bortle_scale):
   return darkness_factor
 
 def photo_factor(strength, visibility, dark, prob):
-  photo_score = strength*visibility*dark
+  photo_score = strength*visibility*dark*prob
   percentage  = photo_score*100
   return percentage
 
