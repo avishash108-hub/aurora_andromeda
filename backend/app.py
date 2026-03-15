@@ -1,5 +1,12 @@
 from flask import Flask, request, jsonify
 import requests
+import os
+def fetch_cloud_cover():
+  weatherapi_key = os.getenv("WEATHER_API")
+  url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={weatherapi_key}"
+  data = requests.get(url).json()
+  cloud_cover = data["clouds"]["all"]/100
+  return cloud_cover
 def fetch_solar_data():
   plasma = requests.get("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", timeout = 5).json()
   mag = requests.get("https://services.swpc.noaa.gov/products/solar-wind/mag-1-day.json", timeout = 5).json()
@@ -72,7 +79,7 @@ def score():
   bz, solar = fetch_solar_data()
   lat = float(request.args.get("lat"))
   lon = float(request.args.get("lon"))
-  cloud = float(request.args.get("cloud_cover"))
+  cloud = fetch_cloud_cover(lat, lon)
   moon = float(request.args.get("moon_light"))
   bortle = float(request.args.get("bortle_scale"))
   prob = fetch_aurora_probab(lat, lon)
