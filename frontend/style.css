@@ -5,7 +5,7 @@ font-family:Arial;
 text-align:center;
 color:white;
 
-/* Aurora Background */
+
 background-image:url("https://res.cloudinary.com/dcrrjqkxk/image/upload/v1773488378/WhatsApp_Image_2026-03-14_at_4.57.05_PM_mffrjv.jpg");
 background-size:cover;
 background-position:center;
@@ -22,55 +22,78 @@ margin-top:20px;
 
 }
 
-/* MAP */
 
 /* #map{
 height:400px;
-opacity:0.5;
+opacity: 0.7;
 width:70%;
 margin:auto;
 margin-top:20px;
 border-radius:10px;
-
 } */
 
-#map{
+
+/globe/
+#globeContainer{
+width:500px;
 height:400px;
-opacity:0.5;
-width:70%;
 margin:auto;
-margin-top:20px;
-border-radius:10px;
+display:flex;
+justify-content:center;
+}
+#globeContainer{
+filter: drop-shadow(0 0 15px #00ffcc);
+}
+#globeContainer canvas{
+pointer-events:none;
+}
+.Header h1{
+color: white;
+text-align: center;
+font-size: 40px;
+letter-spacing: 2px;
+text-shadow: 0px 0px 15px #7df9ff, 0px 0px 30px #00ffff;
 }
 
-.leaflet-tile-pane{
-filter: brightness(1.2) contrast(0.9);
+.Header p{
+text-align: center;
+color: #e0e6ff;
+font-size: 18px;
+margin-top: 5px;
 }
-/* SCORE PANEL */
+.Header{
+
+padding: 15px;
+border-radius: 10px;
+width: fit-content;
+margin: auto;
+}
+
+
+.mainLayout{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:30px;
+margin-top:30px;
+}
 
 .panel{
 
-width:300px;
-margin:20px auto;
+width:320px;
+
 padding:15px;
 
-background:rgba(0,0,0,0.6);
+background:rgba(0,0,0,0.7);
 border-radius:10px;
 
+
 }
-
-/* LOCATION BOX */
-
-/* .locationBox{
-
-margin:20px;
-
-} */
 
 .location-box {
     margin-top: 5px;
   display: flex;
-  gap: 10px;        /* space between input and button */
+  gap: 10px;       
   align-items: center;
   margin-top: 10px;
 }
