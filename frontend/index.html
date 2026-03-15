@@ -4,39 +4,48 @@
 <meta charset="UTF-8">
 <title>🌌 Aurora Visibility Platform</title>
 
-<!-- Leaflet CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-<h1>Aurora Visibility Platform</h1>
+<header class="Header">
+<h1>Aurora Visibility intelligence platform</h1>
+<p>Real-time Aurora Prediction for photographers</p>
+</header>
 
-<!-- MAP -->
-<div id="map"></div>
+<div class="mainLayout">
 
-<!-- VISIBILITY PANEL -->
 <div class="panel">
+
 <h2>Aurora Visibility Score</h2>
 
-<p>Aurora Strength: <span id="aurora"></span></p>
+<p>Aurora Alert: <span id="alert"></span></p>
+<p>Aurora probability: <span id="probab"></span></p>
+<p>Aurora Strength: <span id="strength"></span></p>
 <p>Visibility: <span id="visibility"></span></p>
 <p>Darkness: <span id="darkness"></span></p>
-<p>Photo Score: <span id="photo"></span></p>
+<p>Photography score: <span id="photo"></span></p>
 
-<!-- LOCATION INPUT -->
-<div class="locationBox">
-
+<div class="location-box">
 <input type="text" id="locationInput" placeholder="Enter Location">
-
-<button onclick="checkVisibility()">Check Visibility</button>
+<button id="checkBtn">Check Visibility</button>
+</div>
 
 </div>
 
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<div id="globeContainer" style="width:100%; height:600px;"></div>
+
+</div>
+
+<script src="https://unpkg.com/globe.gl"></script>
+
+<script src="script.js" defer></script>
+
+</body>
+</html>
 
 <script src="script.js"></script>
 
