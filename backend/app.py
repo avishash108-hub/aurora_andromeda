@@ -17,7 +17,17 @@ def fetch_solar_data():
     bz = 0
  
   return bz, solarwind_speed
-  
+
+def fetch_aurora_probab():
+    aurora = requests.get("https://services.swpc.noaa.gov/json/ovation_aurora_latest.json").json()
+    coordinates = aurora["coordinates"]
+    prob_sum = 0
+    count = 0
+    for points in coordinates:
+        prob_sum+=points[2]
+        count+=1
+    aurora_prob = prob_sum/count/100
+    return aurora_prob
   
 app = Flask(__name__)
 def aurora_strength(bz, solarwind_speed):
@@ -58,6 +68,7 @@ def score():
     alert = "High Aurora activity"
   else:
     alert = "Normal Aurora conditions"
+    prob = fetch_aurora_probab()
   cloud = float(request.args.get("cloud_cover"))
   moon = float(request.args.get("moon_light"))
   bortle = float(request.args.get("bortle_scale"))
@@ -65,7 +76,7 @@ def score():
   strength = aurora_strength(bz, solar)
   visibility = cloud_cov(cloud)
   dark = darkness (moon, bortle)
-  photo = photo_factor(strength, visibility, dark)
+  photo = photo_factor(strength, visibility, dark, prob)
 
   return jsonify({
      "aurora_strength" : strength,
