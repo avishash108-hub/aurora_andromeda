@@ -19,17 +19,28 @@ def fetch_cloud_cover(lat, lon):
   return cloud_cover
 
 def fetch_moon_light(lat, lon):
-  app_id = os.getenv("APP_ID")
-  app_secret = os.getenv("SECRET_KEY")
-  credentials = f"{app_id}:{app_secret}"
-  encoded_credentials = base64.b64encode(credentials.encode()).decode()
-  url = f"https://api.astronomyapi.com/api/v2/bodies/positions/moon?latitude={lat}&longitude={lon}&elevation=0"
-  headers = {
-    "Authorization" : f"Basic {encoded_credentials}"
-  }
-  response = requests.get(url, headers = headers).json()
-  moon_light = response["data"]["table"]["rows"][0]["cells"][0]["extraInfo"]["illumination"]["fraction"]
-  return moon_light
+  try:
+    app_id = os.getenv("APP_ID")
+    app_secret = os.getenv("SECRET_KEY")
+
+    credentials = f"{app_id}:{app_secret}"
+    encoded_credentials = base64.b64encode(credentials.encode()).decode()
+
+    url = f"https://api.astronomyapi.com/api/v2/bodies/positions/moon?latitude={lat}&longitude={lon}&elevation=0"
+
+    headers = {
+      "Authorization": f"Basic {encoded_credentials}"
+    }
+
+    response = requests.get(url, headers=headers).json()
+
+    moon_light = response["data"]["table"]["rows"][0]["cells"][0]["extraInfo"]["illumination"]["fraction"]
+
+    return float(moon_light)
+
+  except Exception as e:
+    print("Moon API failed:", e)
+    return 0.5
   
 def fetch_solar_data():
 
