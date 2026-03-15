@@ -1,4 +1,15 @@
 from flask import Flask, request, jsonify
+import requests
+def fetch_solar_data():
+  plasma = requests.get("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json").json()
+  mag = requests.get("https://services.swpc.noaa.gov/products/solar-wind/mag-1-day.json").json
+  latest_plasma = plasma[-1]
+  latest_mag = mag[-1]
+  solarwind_speed = float(latest_plasma[2])
+  bz = float(latest_mag[3])
+  return bz, solarwind_speed
+  
+  
 app = Flask(__name__)
 def aurora_strength(bz, solarwind_speed):
   bz_factor = abs(bz)/10
@@ -33,6 +44,7 @@ def home():
   return "Aurora API running"
 @app.route("/score")
 def score():
+  bz, solar = fetch_solar_data()
   bz = float(request.args.get("bz"))
   solar = float(request.args.get("solarwind_speed"))
   cloud = float(request.args.get("cloud_cover"))
