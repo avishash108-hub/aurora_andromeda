@@ -2,11 +2,20 @@ from flask import Flask, request, jsonify
 import requests
 def fetch_solar_data():
   plasma = requests.get("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json").json()
-  mag = requests.get("https://services.swpc.noaa.gov/products/solar-wind/mag-1-day.json").json
+  mag = requests.get("https://services.swpc.noaa.gov/products/solar-wind/mag-1-day.json").json()
   latest_plasma = plasma[-1]
   latest_mag = mag[-1]
-  solarwind_speed = float(latest_plasma[2])
-  bz = float(latest_mag[3])
+  solar_value = latest_plasma[2]
+  bz_value = latest_mag[3]
+  if solar_value != "" and solar_value != None:
+    solarwind_speed = float(solar_value)
+  else:
+    solarwind_speed = 400
+  if bz_value != "" and bz_value != None:
+    bz = float(bz_value)
+  else:
+    bz = 0
+ 
   return bz, solarwind_speed
   
   
