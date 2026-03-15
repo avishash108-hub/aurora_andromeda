@@ -153,6 +153,13 @@ def score():
   visibility = cloud_cov(cloud)
   dark = darkness (moon, bortle)
   photo = photo_factor(strength, visibility, dark, prob)
+  alert_message = None
+
+  if photo > 60:
+    alert_message = "High Aurora visibility expected!"
+
+  if bz < -8:
+    alert_message = "Substorm warning: Aurora may intensify soon!"
 
   return jsonify({
     "aurora_alert_status" : alert,
@@ -161,6 +168,7 @@ def score():
     "visibility" : visibility,
     "darkness" : dark,
     "photography_score" : photo,
+    "alert_message" : alert_message
   })
 
 if __name__ == "__main__":
