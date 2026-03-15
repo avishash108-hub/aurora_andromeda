@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 import requests
 import os
-def fetch_cloud_cover():
+def fetch_cloud_cover(lat, lon):
   weatherapi_key = os.getenv("WEATHER_API")
   url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={weatherapi_key}"
   data = requests.get(url).json()
