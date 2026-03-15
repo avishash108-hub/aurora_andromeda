@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import requests
 import os
 def fetch_cloud_cover(lat, lon):
@@ -43,6 +44,7 @@ def fetch_aurora_probab(lat, lon):
     return aurora_prob
   
 app = Flask(__name__)
+CORS(app)
 def aurora_strength(bz, solarwind_speed):
   bz_factor = abs(bz)/10
   if bz_factor > 1:
