@@ -92,25 +92,22 @@ def fetch_aurora_probab(lat, lon):
 
     coordinates = aurora["coordinates"]
 
-    prob_sum = 0
-    count = 0
+    closest_prob = 0
+    min_dist = 999
 
-    for points in coordinates:
+    for p in coordinates:
 
-        lon_point = points[0]
-        lat_point = points[1]
-        probability = points[2]
+        lon_point = p[0]
+        lat_point = p[1]
+        prob = p[2]
 
-        # increased search radius so grid points are not missed
-        if abs(lat_point - lat) < 5 and abs(lon_point - lon) < 5:
-            prob_sum += probability
-            count += 1
+        dist = abs(lat_point - lat) + abs(lon_point - lon)
 
-    if count == 0:
-        return 0
+        if dist < min_dist:
+            min_dist = dist
+            closest_prob = prob
 
-    aurora_prob = (prob_sum / count) / 100
-    return aurora_prob
+    return closest_prob / 100
   
 app = Flask(__name__)
 CORS(app)
