@@ -135,7 +135,7 @@ def darkness(moon_light, bortle_scale):
   return darkness_factor
 
 def photo_factor(strength, visibility, dark, prob):
-  photo_score = strength*visibility*dark*prob
+  photo_score = (strength + visibility + dark + prob) / 4
   percentage  = photo_score*100
   return percentage
 
@@ -172,11 +172,11 @@ def score():
 
   return jsonify({
     "aurora_alert_status" : alert,
-    "aurora_probability" : prob,
-    "aurora_strength" : strength,
-    "visibility" : visibility,
-    "darkness" : dark,
-    "photography_score" : photo,
+    "aurora_probability": f"{round(prob * 100, 2)}%",
+    "aurora_strength": f"{round(strength * 100, 2)}%",
+    "visibility": f"{round(visibility * 100, 2)}%",
+    "darkness": f"{round(dark * 100, 2)}%",
+    "photography_score": round(photo, 2),
     "alert_message" : alert_message
   })
 
