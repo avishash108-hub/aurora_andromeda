@@ -71,7 +71,8 @@ def score():
      "aurora_strength" : strength,
      "visibility" : visibility,
      "darkness" : dark,
-     "photography_score" : photo
+     "photography_score" : photo,
+     "aurora_alert_status" : alert
   })
 
 if __name__ == "__main__":
