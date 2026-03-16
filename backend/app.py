@@ -176,7 +176,7 @@ def score():
     "aurora_strength": f"{round(strength * 100, 2)}%",
     "visibility": f"{round(visibility * 100, 2)}%",
     "darkness": f"{round(dark * 100, 2)}%",
-    "photography_score": round(photo, 2),
+    "photography_score": photo,
     "alert_message" : alert_message
   })
 
