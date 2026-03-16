@@ -180,8 +180,8 @@ def score():
     "alert_message" : alert_message
   })
 
+
 if __name__ == "__main__":
     threading.Thread(target=poll_solar_data, daemon=True).start()
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
-
