@@ -46,30 +46,36 @@ Results displayed to the user
 - **HTML**
 - **CSS**
 - **JavaScript**
-- **Leaflet Map API**
+- **globe.gl**
 
 ### Backend
 - **Python**
 - **Flask**
 - **Flask-CORS**
 - **Gunicorn**
-- **Requests** *(for future space‑weather API integration)*
+- **Requests** *(for weather, illumination, bz and solar winds API integration)*
 
 ### Deployment / Infrastructure
+BACKEND
 - **GitHub**
 - **Render Cloud Hosting**
+ WEB APP
+- **Netlify**
 
 ## API Endpoint
 Example request: 
 
 Example response:
-```json
-{
- "aurora_strength": 0.58,
- "visibility": 0.8,
- "darkness": 0.72,
- "photography_score": 33.6
-}
+```json{
+    "alert_message" : NULL,
+    "aurora_alert_status" : Normal Aurora Conditions,
+    "aurora_probability": 23.0%",
+    "aurora_strength": 10.0%",
+    "visibility": 25.0%
+    "darkness": 25.0%",
+    "photography_score": 36.11%,
+    "alert_message" : 23.53
+  }
 
 ##How to Run Locally
 Clone the repository:
